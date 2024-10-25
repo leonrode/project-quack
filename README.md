@@ -7,7 +7,7 @@ See the [Live Project Document](https://docs.google.com/document/d/1ykgmnqtjOGUk
 
 ## Project Authors
 
-- leon.rode@
+- leon.rode@,
 - christy.xia@,
 - siuhin.cheng@,
 - andrew.luong@,
