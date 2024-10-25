@@ -12,5 +12,5 @@ See the [Live Project Document](https://docs.google.com/document/d/1ykgmnqtjOGUk
 - siuhin.cheng@,
 - andrew.luong@,
 - richard.hernandez@,
-- landon.somerville@,
+- landon.somerville@
 
