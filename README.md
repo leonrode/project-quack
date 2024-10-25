@@ -9,8 +9,8 @@ See the [Live Project Document](https://docs.google.com/document/d/1ykgmnqtjOGUk
 
 - leon.rode@
 - christy.xia@,
-- siuhin.cheng@
-- andrew.luong@
-- richard.hernandez@
-- landon.somerville@
+- siuhin.cheng@,
+- andrew.luong@,
+- richard.hernandez@,
+- landon.somerville@,
 
