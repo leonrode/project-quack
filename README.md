@@ -11,7 +11,7 @@ This section will track progress on the project.
 Everyone should be able to show the following during the next meeting:
 
 Continuing in the branch you created for Step 1
-- [ ] Define a by `n x n` 2D array as the map for the game, with 1/0 (or true/false, "X"/"O") being impassable squares/passable squares
+- [ ] Define a `n x n` 2D array as the map for the game, with 1/0 (or true/false, "X"/"O") being impassable squares/passable squares
 - [ ] Draw the `n x n` map with one color being impassable squares, and another being passable squares
 - [ ] Create a player (as a circle, square, etc.) that starts in the middle of the board
     - [ ] Player should move in the passable squares one square at a time depending on ULDR arrows / WASD keyboard input
