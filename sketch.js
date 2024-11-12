@@ -11,7 +11,7 @@ function setup() {
   for (let i = 0; i < tiles; i++) {
     grid[i] = [];
     for (let j = 0; j < tiles; j++) {
-      grid[i][j] = random() < 0.3 ? 1 : 0; 
+      grid[i][j] = random() < 0.2 ? 1 : 0; 
     }
   }
 }
