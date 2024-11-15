@@ -14,6 +14,7 @@ function setup() {
       grid[i][j] = random() < 0.2 ? 1 : 0; 
     }
   }
+  grid[0][0] = 0;
 }
 
 function draw() {
@@ -30,6 +31,7 @@ function draw() {
     }
   }
   fill(225, 0, 0);
+  
   circle(playerX * squareSize + squareSize / 2, playerY * squareSize + squareSize / 2, squareSize / 2);
 }
 function keyPressed() {
