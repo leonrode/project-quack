@@ -8,6 +8,12 @@ const cellColor = 255;
 let playerX = 4;
 let playerY = 3;
 
+window.addEventListener('keydown', function(e) {
+    if ([37, 38, 39, 40].includes(e.keyCode)){
+      e.preventDefault();
+    }
+});
+
 function setup(){
     createCanvas(canvasSize, canvasSize);
     background(100);
@@ -61,26 +67,25 @@ function draw(){
 
     noStroke();
     circle(playerX * cellSize + cellSize / 2, playerY * cellSize + cellSize / 2, cellSize / 2);//In theory doesn't remove old player location
-    
-    if(keyIsPressed){
-        if(key === 'w' || keyCode === UP_ARROW){
-            if(playerY > 0 && passable[playerX][playerY - 1]){
-                playerY--;
-            }
-        }
-        if(key === 'a' || keyCode === LEFT_ARROW){
-            if(playerX > 0 && passable[playerX - 1][playerY]){
-                playerX--;
-            }
-        }if(key === 's' || keyCode === DOWN_ARROW){
-            if(playerY < rows - 1 && passable[playerX][playerY + 1]){
-                playerY++;
-            }
-        }if(key === 'd' || keyCode === RIGHT_ARROW){
-            if(playerX < columns - 1 && passable[playerX + 1][playerY]){
-                playerX++;
-            }
+}
+
+function keyPressed(){
+    if(key === 'w' || keyCode === UP_ARROW){
+        if(playerY > 0 && passable[playerX][playerY - 1]){
+            playerY--;
         }
     }
-
+    if(key === 'a' || keyCode === LEFT_ARROW){
+        if(playerX > 0 && passable[playerX - 1][playerY]){
+            playerX--;
+        }
+    }if(key === 's' || keyCode === DOWN_ARROW){
+        if(playerY < rows - 1 && passable[playerX][playerY + 1]){
+            playerY++;
+        }
+    }if(key === 'd' || keyCode === RIGHT_ARROW){
+        if(playerX < columns - 1 && passable[playerX + 1][playerY]){
+            playerX++;
+        }
+    }
 }
