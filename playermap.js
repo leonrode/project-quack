@@ -1,10 +1,10 @@
-//for movement press on the grid
 let cols = 8;
 let rows = 8;
 let grid = [];
 let cellSize;
 let playerX = 4;
 let playerY = 4;
+let numImpassable = 14; // Number of impassable cells
 
 function setup() {
   createCanvas(800, 800);
@@ -16,24 +16,11 @@ function setup() {
       grid[i][j] = 1; // 1 indicates passable
     }
   }
-  //0 is impassable
-  grid[0][0] = 0;
-  grid[1][0] = 0;
-  grid[2][0] = 0;
-  grid[0][1] = 0;
-  grid[0][2] = 0;
-  grid[1][1] = 0;
-  grid[7][7] = 0;
-  grid[6][7] = 0;
-  grid[6][6] = 0;
-  grid[5][7] = 0;
-  grid[7][6] = 0;
-  grid[7][5] = 0;
+  // Randomly marks some cells as impassable
+  makeImpassable(numImpassable);
 }
-
 function draw() {
   background(220);
-
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       if (grid[i][j] === 1) {
@@ -66,14 +53,21 @@ function keyPressed() {
   } else if (keyCode === LEFT_ARROW || key === "a") {
     nextX--;
   }
-  if (
-    nextX >= 0 &&
-    nextX < cols &&
-    nextY >= 0 &&
-    nextY < rows &&
-    grid[nextX][nextY] === 1
-  ) {
+  if (nextX >= 0 && nextX < cols && nextY >= 0 && nextY < rows &&
+    grid[nextX][nextY] === 1) {
     playerX = nextX;
     playerY = nextY;
+  }
+}
+function makeImpassable(num) {
+  let count = 0;
+  while (count < num) {
+    let randomX = floor(random(cols));
+    let randomY = floor(random(rows));
+
+    if (grid[randomX][randomY] === 1 && !(randomX === playerX && randomY === playerY)) {
+      grid[randomX][randomY] = 0; // Marks as impassable
+      count++;
+    }
   }
 }
