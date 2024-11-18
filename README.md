@@ -13,7 +13,7 @@ Everyone should be able to show the following during the next meeting:
 Continuing in the branch you created for Step 1
 - [ ] When the user presses space, fill the area the player is in with a random color
     - [ ] If completed easily, figure out how to "mix" colors, i.e. if the user presses space twice, filling the already-filled area with a second color, figure out how to calculate a "mix" of the existing color and new color, and then fill the area with that mix.
-        - One paper I found: `http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf`
+        - One [paper](http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf) I found
 - [x] Define a `n x n` 2D array as the map for the game, with 1/0 (or true/false, "X"/"O") being impassable squares/passable squares
 - [x] Draw the `n x n` map with one color being impassable squares, and another being passable squares
 - [x] Create a player (as a circle, square, etc.) that starts in the middle of the board
