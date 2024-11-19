@@ -1,22 +1,28 @@
+function preload() {
+}
+
 function setup() {
-  var size = 800;
+  var size = 1000;
   createCanvas(size, size);
   background(240);
-  var checkerSize = 100;
-  square(0, 0, checkerSize);
+  var checkerSize = size/10;
+  for (let i = 0; i < size; i+= checkerSize){ //top-bottom border
+    for(let j = 0; j < size; j+= checkerSize) { //left-right border
       fill(0);
-  for (let i = 0; i < size; i+=(checkerSize*2)){
-    for(let j = 0; j < size; j+=(checkerSize*2)) {
-      noStroke();
-      square(i, j, checkerSize);
-      fill(0);
+      square(i, 0, checkerSize);
+      square(i, size - checkerSize, checkerSize);
+      square(0, j, checkerSize);
+      square(size - checkerSize, j, checkerSize);
     }
   }
-  for (let i = 100; i < size; i+=(checkerSize*2)){
-    for(let j = 100; j < size; j+=(checkerSize*2)) {
-      noStroke();
-      square(i, j, checkerSize);
+  for (let i = 0; i < size; i+= checkerSize){ 
+    for(let j = 0; j < size; j+= checkerSize) {
       fill(0);
+      square(i, 0, checkerSize);
+      if ((j == (5 * checkerSize) && i == (1 * checkerSize)) || (j == (7 * checkerSize) && i == (1 * checkerSize) || (j == (8 * checkerSize) && i == (1 * checkerSize)) || (j == (8 * checkerSize) && i == (2 * checkerSize)) )) {
+        fill(0);
+        square(i, j, checkerSize);
+      }
     }
   }
 }
