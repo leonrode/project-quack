@@ -11,7 +11,7 @@ This section will track progress on the project.
 Everyone should be able to show the following during the next meeting:
 
 Continuing in the branch you created for Step 1
-- [ ] When the user presses space, fill the area the player is in with a random color
+- [ ] When the user presses space, fill the **entire** area the player is in with a random color (i.e. fill all squares within the region of the map that contains the player bounded by impassable squares)
     - [ ] If completed easily, figure out how to "mix" colors, i.e. if the user presses space twice, filling the already-filled area with a second color, figure out how to calculate a "mix" of the existing color and new color, and then fill the area with that mix.
         - One [paper](http://nishitalab.org/user/UEI/publication/Sugita_IWAIT2015.pdf) I found
 - [x] Define a `n x n` 2D array as the map for the game, with 1/0 (or true/false, "X"/"O") being impassable squares/passable squares
