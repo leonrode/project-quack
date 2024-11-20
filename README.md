@@ -6,7 +6,7 @@ This is a team project for SBCS's Project Quack program during the 2024-25 seaso
 
 This section will track progress on the project.
 
-### TODO for 20 November 2024
+### TODO for 24 November 2024
 
 Everyone should be able to show the following during the next meeting:
 
