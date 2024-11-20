@@ -4,7 +4,7 @@ let grid = [];
 let cellSize;
 let playerX = 4;
 let playerY = 4;
-let numImpassable = 14; // Number of impassable cells
+let numImpassable = 20; // Number of impassable cells
 
 function setup() {
   createCanvas(800, 800);
@@ -25,9 +25,10 @@ function draw() {
     for (let j = 0; j < rows; j++) {
       if (grid[i][j] === 1) {
         fill(200); // Passable cell color
-      } else {
+      } else if (grid[i][j] === 0) {
         fill(50); // Impassable cell color
-      }
+      } else if (grid[i][j] === 2) {
+        fill('green');
       stroke(0);
       rect(i * cellSize, j * cellSize, cellSize, cellSize);
     }
@@ -58,6 +59,8 @@ function keyPressed() {
     playerX = nextX;
     playerY = nextY;
   }
+  if (keyCode === 32) {
+    grid[playerX][playerY] = 2;
 }
 function makeImpassable(num) {
   let count = 0;
