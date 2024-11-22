@@ -11,10 +11,37 @@ function setup() {
   for (let i = 0; i < tiles; i++) {
     grid[i] = [];
     for (let j = 0; j < tiles; j++) {
-      grid[i][j] = random() < 0.2 ? 1 : 0; 
+      grid[i][j] = 0; 
     }
   }
-  grid[0][0] = 0;
+  grid[0][1] = 1;
+  grid[1][1] = 1;
+  grid[1][2] = 1;
+  grid[1][3] = 1;
+  grid[1][4] = 1;
+  grid[2][3] = 1;
+  grid[2][4] = 1;
+  grid[4][3] = 1;
+  grid[5][3] = 1;
+  grid[5][4] = 1;
+  grid[6][4] = 1;
+  grid[1][5] = 1;
+  grid[1][6] = 1;
+  grid[2][6] = 1;
+  
+  grid[5][0] = 1;
+  grid[5][2] = 1;
+
+  //Comment out below to block off areas
+  
+  grid[5][1] = 1;
+
+  grid[3][3] = 1;
+
+  grid[7][4] = 1;
+
+
+
 }
 
 function draw() {
@@ -23,6 +50,8 @@ function draw() {
     for (let j = 0; j < tiles; j++) {
       if (grid[i][j] === 0) {
         fill(200); 
+      } else if (grid[i][j] === 2){
+        fill(150, 255, 255);
       } else {
         fill(0);
       }
@@ -43,12 +72,27 @@ function keyPressed() {
     newY++;
   } else if (key === "d" || keyCode === RIGHT_ARROW) {
     newX++;
-  } else if (key === "a" || keyCode === LEFT_ARROW) {
+  } else if (key === "a" || keyCode === LEFT_ARROW){ 
     newX--;
   }
-  if (newX >= 0 && newX < tiles && newY >= 0 && newY < tiles & grid[newX][newY] === 0) {
+  if (newX >= 0 && newX < tiles && newY >= 0 && newY < tiles & grid[newX][newY] != 1) {
     playerX = newX;
     playerY = newY;
   }
-}
 
+
+  if (keyCode === 32){
+    fillSpace(playerX, playerY);
+  }
+
+}
+function fillSpace(x, y){
+  if (x < 0 || x >= tiles || y < 0 || y >= tiles || grid[x][y] !== 0) {
+    return;
+  }
+  grid[x][y] = 2;
+  fillSpace(x - 1, y); 
+  fillSpace(x + 1, y); 
+  fillSpace(x, y - 1); 
+  fillSpace(x, y + 1);
+}
