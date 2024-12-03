@@ -1,17 +1,19 @@
-  var player;
+let player;
+var size = 1000;
+let checkerSize = size/10;
+let x = 0;
+let y = 2 * checkerSize + 7;
+
+
 function preload() {
-   player = loadImage("player.png");
+  player = loadImage('player.png');
 }
 
 function setup() {
-  var size = 800;
   createCanvas(size, size);
   background(240);
   var checkerSize = size/10;
-
-  square(0, 200, checkerSize);
-    fill(240);
-
+  noStroke();
   for (let i = 0; i < size; i+= checkerSize){ //top-bottom border
     for(let j = 0; j < size; j+= checkerSize) { //left-right border
       fill(0);
@@ -21,7 +23,7 @@ function setup() {
       square(size - checkerSize, j, checkerSize);
     }
   }
-  for (let i = 0; i < size; i+= checkerSize){ 
+  for (let i = 0; i < size; i+= checkerSize){ //fills in the rest of the map
     for(let j = 0; j < size; j+= checkerSize) {
       fill(0);
       square(i, 0, checkerSize);
@@ -52,8 +54,30 @@ function setup() {
       }
     }
   }
- image(player, mouseX , mouseY);
-}
+  fill(240);
+    square(0, 2 * checkerSize, checkerSize);
+  }
 
 function draw() {
+ //while (x < (size - checkerSize) && x > checkerSize && y < (size - checkerSize) && y > checkerSize){
+    image(player, x, y);
+ //}
 }
+
+/*function keyPressed() {
+    if (key === ENTER) {
+    }
+}*/
+
+function keyReleased() {
+  if (keyCode === 87) {
+    y -= checkerSize;
+  } else if (keyCode === 65) {
+    x -= checkerSize;
+  } else if (keyCode === 83) {
+    y += checkerSize;
+  } else if (keyCode === 68) {
+    x += checkerSize;
+  }
+}
+
