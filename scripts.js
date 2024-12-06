@@ -9,7 +9,7 @@ let playerX = 4;
 let playerY = 3;
 
 window.addEventListener('keydown', function(e) {
-    if ([37, 38, 39, 40].includes(e.keyCode)){
+    if ([32, 37, 38, 39, 40].includes(e.keyCode)){
       e.preventDefault();
     }
 });
@@ -68,7 +68,45 @@ function draw(){
     noStroke();
     circle(playerX * cellSize + cellSize / 2, playerY * cellSize + cellSize / 2, cellSize / 2);//In theory doesn't remove old player location
 }
-
+function fillSpace(x, y, fillColor){
+    fill(fillColor);
+    let queue = [];
+    let marked = new Set();
+    queue.push([x, y])
+    marked.add(`${x},${y}`)
+    while(queue.length > 0){
+        console.log(`${x},${y}`);
+        let [cellX, cellY] = queue.shift();
+        if(passable[cellX][cellY]){
+            rect(cellX * cellSize, cellY * cellSize, cellSize, cellSize);
+        }
+        let neighbors = getNeighbor(cellX, cellY);
+        for(let neighbor of neighbors){
+            let [neighborX, neighborY] = neighbor;
+            if(!marked.has(`${neighborX},${neighborY}`)){
+                marked.add(`${neighborX},${neighborY}`);
+                queue.push(neighbor);
+                console.log(`${marked}`);
+            }
+        }
+    }
+}
+function getNeighbor(x, y){
+    let neighbors = [];
+    if(x + 1 < columns){
+        neighbors.push([x + 1, y]);
+    }
+    if(x - 1 >= 0){
+        neighbors.push([x - 1, y]);
+    }
+    if(y + 1 < rows){
+        neighbors.push([x, y + 1]);
+    }
+    if(y - 1 >= 0){
+        neighbors.push([x, y - 1]);
+    }
+    return neighbors;
+}
 function keyPressed(){
     if(key === 'w' || keyCode === UP_ARROW){
         if(playerY > 0 && passable[playerX][playerY - 1]){
@@ -79,13 +117,18 @@ function keyPressed(){
         if(playerX > 0 && passable[playerX - 1][playerY]){
             playerX--;
         }
-    }if(key === 's' || keyCode === DOWN_ARROW){
+    }
+    if(key === 's' || keyCode === DOWN_ARROW){
         if(playerY < rows - 1 && passable[playerX][playerY + 1]){
             playerY++;
         }
-    }if(key === 'd' || keyCode === RIGHT_ARROW){
+    }
+    if(key === 'd' || keyCode === RIGHT_ARROW){
         if(playerX < columns - 1 && passable[playerX + 1][playerY]){
             playerX++;
         }
+    }
+    if(key === " " || keyCode === 32){
+        fillSpace(playerX, playerY, 174);
     }
 }
