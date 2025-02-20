@@ -95,8 +95,7 @@ function draw(){
     // x = screen x
     // y = screen y
     
-    
-    image(player_image, 0, 0, 100, 100);
+    image(player_image, playerX, playerY, 100, 100);
 }
 
 function keyPressed(){
@@ -123,4 +122,4 @@ function keyPressed(){
     if(key === " " || keyCode === 32){
         fillSpace(playerX, playerY, 174);
     }
-}p
+}
