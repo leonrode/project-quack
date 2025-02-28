@@ -14,12 +14,7 @@ window.addEventListener('keydown', function(e) {
     }
 });
 
-/**
- * function preload() -> load images in p5js
- */
-
 let player_image;
-
 function preload() {
     player_image = loadImage('player.png');
 }
@@ -58,20 +53,51 @@ function restartBoard(){
     }
 }
 
+function colorChange(color){
+    fill(color);
+    stroke(color);
+}
+
 function createWall(row, col){
     passable[col][row] = false;
 }
 
 function fillSpace(x ,y, color){
-fill(color);
-let queue = [[x, y]]
-//initialze visited array
-let visited = Array(n).fill().map(() => Array(grid[0].length).fill(false));
-visited[x][y] = true;
-
-while(queue.length > 0){
+    const dir = [
+        [0, 1],
+        [0, -1],
+        [1, 0],
+        [-1, 0]
+    ]
+    colorChange(color);
+    let queue = [[x, y]]
     
-}
+    const visited = [];
+    //make new function with below loop with param bool to return an array
+    for(let i = 0; i < rows; i++){
+        visited[i] = [];
+        for(let j = 0; j < columns; j++){
+            visited[i][j] = false;
+        }
+    }
+    visited[x][y] = true;
+
+    while(queue.length > 0){
+        let [currentX, currentY] = queue.shift();
+        for(let [dx, dy] of dir){
+            let neighborX = currentX + dx;
+            let neighborY = currentY + dy;
+            if(neighborX >= 0 && neighborX < rows && neighborY >= 0 && neighborY < columns){
+                if(!visited[neighborX][neighborY] && passable[neighborX][neighborY]){
+                    visited[neighborX][neighborY] = true;
+                    //make rectange for that particular square
+                    rect(neighborX * cellSize, neighborY * cellSize, cellSize, cellSize); // need some global color tracking, otherwise the colored tile will be drawn over
+                    queue.push([neighborX, neighborY]);
+                    console.log("Pushed " + neighborX + ", " + neighborY); //Seems work but rect isn't making a rectangle
+                }
+            }
+        }
+    }
 }
 
 function draw(){
@@ -95,7 +121,7 @@ function draw(){
     // x = screen x
     // y = screen y
     
-    image(player_image, playerX, playerY, 100, 100);
+    image(player_image, playerX * cellSize, playerY * cellSize, 100, 100);
 }
 
 function keyPressed(){
