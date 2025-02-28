@@ -1,21 +1,21 @@
 // https://socket.io/docs/v4/tutorial/step-1
 
-const express = require('express');
-const { createServer } = require('node:http');
-const { join } = require('node:path');
-const { Server } = require('socket.io');
+const express = require("express"); // makes the server
+const app = express(); // called to start server
 
-const app = express();
-const server = createServer(app);
+// below are dependencies
+const path = require("path");
+const http = require("http");
+const { Server } = require("socket.io");
 
-app.get('/', (req, res) => {
-  res.sendFile(join(__dirname, 'server-index.html'));
-});
+const server = http.createServer(app);
+const io = new Server(server);
+app.use(express.static(path.resolve(""))); // Allows the use of server in html
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
+app.get("/", (req, res) => {
+  return res.sendFile("index.html");
 });
 
 server.listen(3000, () => {
-  console.log('server running at http://localhost:3000');
+  console.log("Port connected to 3000"); // to test if running, run in terminal : npx nodemon server
 });
