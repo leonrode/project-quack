@@ -129,6 +129,7 @@ function draw() {
   // y = screen y
 
   image(player_image, playerX * cellSize, playerY * cellSize, 100, 100);
+  image(player_image, 1 * cellSize, 1 * cellSize, 100, 100); // purely for demonstration -> Second player on top left. Not movable yet
 }
 
 function keyPressed() {
