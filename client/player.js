@@ -1,43 +1,48 @@
-class Player extends Game{
-    constructor(initialX, initialY, cellSize) {
+class Player{
+    constructor(initialX, initialY, cellSize, image) {
         this.x = initialX;
         this.y = initialY;
         this.CELL_SIZE = cellSize;
+        this.image = image;
     }
-    get PositionX() {
+    getX() {
         return this.x;
     }
-    get PositionY() {
+    getY() {
         return this.y;
     }
-    set PositionX(newX) {
+    setX(newX) {
         this.x = newX;
     }
-    set PositionY(newY) {
+    setY(newY) {
         this.y = newY;
     }
     // display (how to draw this)
-    function(draw) {
-        image(player_image, this.x * cellSize, this.y * cellSize, 100, 100);
+    draw() {
+        
+        image(this.image, this.x * this.CELL_SIZE, this.y * this.CELL_SIZE, 100, 100);
     }
 
     // onkeyPress method
     /*
     * moves player on keypress
     */
-    onkeyPress() {
-    if (key == 'w' || keycode == UP_ARROW) {
-        newY--;
-    }
-    if (key == 'a' || keycode == LEFT_ARROW) {
-        newX--;
-    }
-    if (key == 's' || keycode == DOWN_ARROW) {
-        newY++;
-    }
-    if (key == 'd' || keycode == RIGHT_ARROW) {
-        newX++;
-    }
-    
+    onKeyPress() {
+        if (key == 'w' || keyCode == UP_ARROW) {
+            this.y--;
+        }
+        if (key == 'a' || keyCode == LEFT_ARROW) {
+            this.x--;
+        }
+        if (key == 's' || keyCode == DOWN_ARROW) {
+            this.y++;
+        }
+        if (key == 'd' || keyCode == RIGHT_ARROW) {
+            this.x++;
+        }
+
+        // if(key === " " || keyCode === 32){
+        //     fillSpace(playerX, playerY, [244, 0, 0]);
+        // }
     }
 }
