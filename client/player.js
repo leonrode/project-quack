@@ -4,6 +4,7 @@ class Player{
         this.y = initialY;
         this.CELL_SIZE = cellSize;
         this.image = image;
+        this.holdingColor = "purple";
     }
     getX() {
         return this.x;
@@ -17,15 +18,20 @@ class Player{
     setY(newY) {
         this.y = newY;
     }
-    // display (how to draw this)
+    getHoldingColor(){
+        return this.holdingColor;
+    }
+    setHoldingColor(color){
+        this.holdingColor = color;
+    }
+    /**
+     * Draws the player sprite (display)
+     */
     draw() {
-        
         image(this.image, this.x * this.CELL_SIZE, this.y * this.CELL_SIZE, 100, 100);
     }
-
-    // onkeyPress method
     /*
-    * moves player on keypress
+    * Moves player and fills in space on keypress
     */
     onKeyPress() {
         if (key == 'w' || keyCode == UP_ARROW) {
@@ -41,8 +47,8 @@ class Player{
             this.x++;
         }
 
-        // if(key === " " || keyCode === 32){
-        //     fillSpace(playerX, playerY, [244, 0, 0]);
-        // }
+        if(key === " " || keyCode === 32){
+            fillSpace(playerX, playerY, [244, 0, 0]);
+        }
     }
 }
