@@ -1,9 +1,13 @@
 class Level{
-    constructor(rows, cols, backgroundColor){
+    constructor(rows, cols, backgroundColor, playerImage){
         this.rows = rows;
         this.cols = cols;
         this.backgroundColor = backgroundColor;
         this.tileGrid = [];
+
+        //this.clientPlayer
+        this.player = new Player(1, 1, cellSize, playerImage);
+
         for(let i = 0; i < rows; i++){
             this.tileGrid[i] = [];
             for(let j = 0; j < cols; j++){
@@ -14,23 +18,40 @@ class Level{
 
     getTileGrid(){ return this.tileGrid; }
 
-    getTile(i, j){ return this.tileGrid[i][j]; }
+    // returns Tile corresponding to an x posiiton and y position
+    getTile(x, y){ return this.tileGrid[x][y]; }
 
     createWall(x, y){
         this.tileGrid[x][y] = new Wall(x, y);
-        console.log("Created wall at " + "(" + x + ", " + y +")");
     }
 
     swap(x1, y1, x2, y2){
         const temp = this.tileGrid[x1][y1];
         this.tileGrid[x1][y1] = this.tileGrid[x2][y2];
         this.tileGrid[x2][y2] = temp;
-        console.log("Swapped Tile(" + x1 + ", " + y1 + ") with (" + x2 + ", " + y2 + ")");
+    }
+
+    draw() {
+        for(let i = 0; i < rows; i++){
+            for(let j = 0; j < cols; j++){
+                color = level.getTile(i, j).getColor();
+    
+                
+                fill(color);
+                rect(i * cellSize, j * cellSize, cellSize, cellSize);
+            }
+        }
+
+        this.player.draw();
+
+        
     }
 
     colorTiles(tile, color){
+        console.log("coloring tiles with " + color);
         const visited = [];
-        let queue = [[tile.getX, tile.getY]];
+        let queue = [[tile.getX(), tile.getY()]];
+        
         const dir = [
             [0, 1],
             [0, -1],
@@ -44,17 +65,18 @@ class Level{
             }
         }
         visited[tile.getX()][tile.getY()] = true;
+        tile.setColor(color);
         while(queue.length > 0) {
             let [currentX, currentY] = queue.shift();
             for(let [dx, dy] of dir){
                 let neighborX = currentX + dx;
                 let neighborY = currentY + dy;
+                
                 if(neighborX >= 0 && neighborX < rows && neighborY >= 0 && neighborY < cols){
-                    if(!visited[neighborX][neighborY] && tiles[neighborX][neighborY].isPassable()){
+                    if(!visited[neighborX][neighborY] && this.tileGrid[neighborX][neighborY].isPassable()){
                         visited[neighborX][neighborY] = true;
                         queue.push([neighborX, neighborY]);
-                        this.tileGrid[neighborX][neighborY].setColor(color)
-                        console.log("Neighbor colored: (" + neighborX + ", " + neighborY + ")");
+                        this.tileGrid[neighborX][neighborY].setColor(color);
                     }
                 }
             }
@@ -68,22 +90,23 @@ class Level{
 
     onKeyPress() {
         if (key == 'w' || keyCode == UP_ARROW) {
-            player.y--;
+            if(this.getTile(this.player.getX(), this.player.getY() - 1).isPassable())
+                this.player.y--;
         }
         if (key == 'a' || keyCode == LEFT_ARROW) {
-            player.x--;
+            if(this.getTile(this.player.getX() - 1, this.player.getY()).isPassable())
+                this.player.x--;
         }
         if (key == 's' || keyCode == DOWN_ARROW) {
-            player.y++;
+            if(this.getTile(this.player.getX(), this.player.getY() + 1).isPassable())
+                this.player.y++;
         }
         if (key == 'd' || keyCode == RIGHT_ARROW) {
-            player.x++;
+            if(this.getTile(this.player.getX() + 1, this.player.getY()).isPassable())
+                this.player.x++;
         }
         if(key === " " || keyCode === 32){
-            colorTiles(getTile(player.getX(), player.getY()), player.getHoldingColor());
+            this.colorTiles(this.getTile(this.player.getX(), this.player.getY()), this.player.getHoldingColor());
         }
-        // if(key === " " || keyCode === 32){
-        //     fillSpace(playerX, playerY, [244, 0, 0]);
-        // }
     }
 }
